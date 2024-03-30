@@ -45,7 +45,7 @@
 		}		
 		$result=mysqli_query($conn, "INSERT INTO users(username, email, password)VALUES('$username', '$email', '$password')");
 		if($result){
-			$_SESSION['success_message']="Your account created successfully, now login.";
+			$_SESSION['success_message']="Account creation successful. Please wait for admin approval.";
 			header("Location:login.php");
 			exit();			
 		}
