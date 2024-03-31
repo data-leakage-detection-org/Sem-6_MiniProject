@@ -149,7 +149,7 @@ if($result){
     if(mysqli_num_rows($result)>0){
            	while($rows=mysqli_fetch_array($result)){
            		$userid=$rows['id'];;
-           		$username=ucfirst($rows['username']);
+           		$username=$rows['username'];
 ?>           		
 <option value='<?=$userid?>'><?=$username?></option>
 <?php           		

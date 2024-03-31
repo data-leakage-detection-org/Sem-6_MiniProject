@@ -30,7 +30,9 @@ $rows=mysqli_fetch_array($result);
 <strong>Username:</strong> <?=$rows['username']?> <br>
 <strong>Email Id:</strong> <?=$rows['email']?> <br>
 <div class="text-center">
-<a href="profile.php">Edit</a>
+<a href="profile.php">
+	<button class='btn btn-primary' style='margin-top:2%'>Edit profile</button>
+</a>
 </div>
 </div>
 </div>

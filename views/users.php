@@ -55,11 +55,11 @@ if($result){
 <tr>
 	<td><?=$i?></td>
 	<td>
-		<?=ucfirst($username)?>			<br/>
-	<!--<strong>Gender:</strong> <?=$rows['gender']?> <br/>
-	<strong>Mobile:</strong> <?=$rows['mobile']?> <br/>-->
+		<?=($username)?>			<br/>
+	<strong>Gender:</strong> <?=$rows['gender']?> <br/>
+	<strong>Mobile:</strong> <?=$rows['mobile']?> <br/>
 	</td>
-	<td><?=ucfirst($email)?></td>
+	<td><?=($email)?></td>
 	<td>
 <?php 
 if($admin_active=="0"){
