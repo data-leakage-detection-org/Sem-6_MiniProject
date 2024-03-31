@@ -18,6 +18,21 @@
 <?php 
 $userid=$_SESSION['user_id'];
 
+if(isset($_POST["delete"])){
+	$query = "DELETE FROM users WHERE id='$userid'";
+	$result = mysqli_query($conn,$query);
+	if($result)
+	{
+		session_unset();
+		session_destroy();
+		header("Location:delete_account.php");
+	}
+	else
+	{
+		echo "problem occured";
+	}
+}
+
 if(isset($_POST['update'])){		
 		$username=$_POST['username'];
 		$password=$_POST['password'];
@@ -78,7 +93,7 @@ $rows=mysqli_fetch_array($result);
 <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
 		<label for="username">Username</label>
-		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>" autofocus>
+		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>">
 	</div>
 
 	<div class="mb-3">
@@ -126,16 +141,16 @@ $rows=mysqli_fetch_array($result);
 if(isset($_SESSION['profile'])){
 	if($_SESSION['profile'] == 'user_profile.jpg'){
 ?>
-<img 
+<img
 	src="../assets/profiles/user_profile.jpg" 
-	style="width:120px; height: 120px; border-radius: 50%;"/>
+	style="width:120px; height: 120px; border-radius: 50%; margin-top:2%"/>
 <?php
 	}
 	else{
 ?>
 <img 
 	src="../assets/profiles/<?=$_SESSION['profile']?>" 
-	style="width:120px; height: 120px; border-radius: 50%;"/>	
+	style="width:120px; height: 120px; border-radius: 50%; margin-top:2%"/>	
 <?php
 	}
 }
@@ -194,7 +209,32 @@ if(isset($_POST['upload'])){
 					</div>
 				</div>
 			</div>
+			<div class="text-center">
+	<button class='btn btn-outline-dark' style='margin-top:1%' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	Delete my account
+</button>
+</div>
 		</div>
 	</div>	
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm account deletion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete your account? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+		<form method="post">
+        	<button type="submit" name="delete" class="btn btn-outline-dark">Yes, delete</button>
+		</form>
+		</div>
+    </div>
+  </div>
+</div>
+	
 </body>
 </html>

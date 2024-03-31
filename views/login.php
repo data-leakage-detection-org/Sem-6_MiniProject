@@ -37,7 +37,7 @@
 				exit();				
 			}
 			else{
-				echo "<div class='alert alert-warning'>Failed to login: Your account not approved by admin.</div>";
+				echo "<div class='alert alert-warning'>Failed to login: Your account has not been approved by admin yet.</div>";
 			}			
 		}
 		else{

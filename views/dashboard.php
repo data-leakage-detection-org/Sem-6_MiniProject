@@ -44,20 +44,18 @@ if(isset($_SESSION['user_type'])){
 }
  ?>
 </div>
-				
+<?php include_once('success_message.php');?>			
 			</div>
 			<!-- col -->
-			<div class="col-sm-9">
-				<div class="row">
+			<!-- <div class="col-sm-9"> -->
+				<!-- <div class="row">
 					<div class="col-sm-12">
-						<?php include_once('success_message.php');?>
+						
+						
 					</div>
-				</div>
+				</div> -->
 				<!-- ROW -->
-
-				
-
-			</div>
+			<!-- </div> -->
 			<!-- col -->
 		</div>
 		<!-- row -->
