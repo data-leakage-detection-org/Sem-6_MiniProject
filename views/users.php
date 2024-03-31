@@ -38,7 +38,7 @@ $sql="UPDATE users SET admin_active='0' WHERE admin_active='1' AND id='$userid' 
 $result=mysqli_query($conn,$sql);
 }
 
-$sql="SELECT * FROM users WHERE user_type='user' ORDER BY id DESC";
+$sql="SELECT * FROM users ORDER BY id DESC";
 $result=mysqli_query($conn,$sql);
 if($result){
        if(mysqli_num_rows($result)>0){
@@ -56,8 +56,8 @@ if($result){
 	<td><?=$i?></td>
 	<td>
 		<?=ucfirst($username)?>			<br/>
-	<strong>Gender:</strong> <?=$rows['gender']?> <br/>
-	<strong>Mobile:</strong> <?=$rows['mobile']?> <br/>
+	<!--<strong>Gender:</strong> <?=$rows['gender']?> <br/>
+	<strong>Mobile:</strong> <?=$rows['mobile']?> <br/>-->
 	</td>
 	<td><?=ucfirst($email)?></td>
 	<td>
@@ -83,6 +83,7 @@ else if($admin_active=="1"){
 <?php if($user['blocked']=="0"){ ?>
 		<a href="block_user.php?id=<?=$user['id']?>" class="btn btn-info mb-1">Block</a>
 		<a href="remove_user.php?id=<?=$user['id']?>" class="btn btn-danger mb-1">Remove</a>
+		<a href="upgrade_to_admin.php?id=<?=$user['id']?>" class= "btn btn-info mb-1">Upgrade to Admin</a>
 	<?php }else if($user["blocked"]=="1"){ ?>
 		<a href="unblock_user.php?id=<?=$user['id']?>" class="btn btn-warning mb-1">Unblock</a>
 	<?php } ?>
