@@ -1,0 +1,64 @@
+<?php require_once("../server/connect.php"); ?>
+<?php include_once("../session.php"); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<?php include_once("bootstrap.php"); ?>
+</head>
+<body class="dashboard_background">
+<?php include_once("menubar.php"); ?>
+    <div class="container" style="padding-top:12%">
+        <div style="width:50%;margin:auto;border:1px solid black;padding:2.5%;border-radius:10px">
+        <h2 class="text-center">Change password</h2><br>
+<?php
+$userid=$_SESSION['user_id'];
+if(isset($_POST['change_password'])){
+    $password=$_POST['password'];
+    $cpassword=$_POST['cpassword'];
+    if(!empty($password) && !empty($cpassword))
+    {
+        if($password ==$cpassword)
+        {
+            $sql="UPDATE users SET password='$password' WHERE id='$userid' LIMIT 1";
+            $result=mysqli_query($conn,$sql);
+            if($result)
+            {
+                echo "<div class='alert alert-success'><strong>Success:</strong> Successfully updated.</div>";
+            }
+        }
+        else
+        {
+            echo "<div class='alert alert-danger'><strong>Failed:</strong> Please re-enter password correctly.</div>";
+        }
+    }
+    else
+    {
+        echo "<div class='alert alert-danger'><strong>Failed:</strong> Please fill in all the fields.</div>";
+    }
+}
+?>
+<div>
+<form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+    <div class="mb-3">
+		<label for="password">New Password:</label>
+		<input type="text" name="password" class="form-control" value="<?=$rows['password']?>" required>
+	</div>
+    <div class="mb-3">
+		<label for="cpassword">Confirm Password:</label>
+		<input type="text" name="cpassword" class="form-control" value="<?=$rows['cpassword']?>" required>
+	</div>
+    <br>
+    <div class="mb-3 text-center">
+		<button type="submit" name="change_password" class="btn btn-primary">Submit</button>
+	</div>
+</form>
+</div>
+</div>
+    </div>  
+</body>
+</html>
+
+<!-- style="width:70%;margin:auto" -->

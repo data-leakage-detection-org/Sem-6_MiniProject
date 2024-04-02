@@ -17,73 +17,33 @@
 					<div class="card-body">
 <?php 
 $userid=$_SESSION['user_id'];
+if(isset($_POST['password']))
+{
+	header('location:change_password.php');
 
-if(isset($_POST["delete"])){
-	$query = "DELETE FROM users WHERE id='$userid'";
-	$result = mysqli_query($conn,$query);
-	if($result)
-	{
-		session_unset();
-		session_destroy();
-		header("Location:delete_account.php");
-	}
-	else
-	{
-		echo "problem occured";
-	}
 }
-
 if(isset($_POST['update'])){		
-		$username=$_POST['username'];
-		$password=$_POST['password'];
-		$cpassword=$_POST['cpassword'];		
-		if(isset($_POST['gender'])){
-			$gender=$_POST['gender'];
-		}
-		else{
-			echo "Gender is required.";
-			exit();
-		}
+		$username=$_POST['username'];	
 
-		if($_POST['mobile']){
-			$mobile = $_POST['mobile'];
+		if(!empty($username) && !empty($mobile) && !empty($cpassword))
+		{		
+			$sql="UPDATE users SET username='$username', gender='$gender', mobile='$mobile' WHERE id='$userid' LIMIT 1";
+			$result=mysqli_query($conn,$sql);
+			if($result)
+			{
+				$_SESSION['username']=$username;
+       			echo "<div class='alert alert-success'><strong> Successfully updated.</strong></div>";
+			}
+		else
+		{
+			echo "Failed to update information.";
+		}              
 		}
-		else{
-			echo "Mobile is required.";
-			exit();
-		}
-
-		if(!empty($username) && !empty($password) && !empty($cpassword)){
-           if($password ==$cpassword){
-
-$sql="UPDATE users SET username='$username', password='$password', gender='$gender', mobile='$mobile' WHERE id='$userid' LIMIT 1";
-$result=mysqli_query($conn,$sql);
-if($result){
-	$_SESSION['username']=$username;
-       echo "<div class='alert alert-success'><strong>Success:</strong> Successfully updated.</div>";
-}
-else{
-	echo "Something wrong.";
-}              
-           }
-           else{
-echo "<div class='alert alert-danger'>
-<strong>Failed:</strong>
-Password and confirm password are not same.
-</div>
-";
-           }
-		}
-		else{
-echo "
-<div class='alert alert-danger'>
-  <strong>Failed:</strong>
-  Fill up data.
-</div>
-";
+		else
+		{ 
+			echo " <div class='alert alert-danger'><strong>Failed: </strong> Please fill in all fields. </div>";
 		}
 }
-
 
 $sql="SELECT * FROM users WHERE id='$userid' LIMIT 1";
 $result=mysqli_query($conn,$sql);     
@@ -93,12 +53,12 @@ $rows=mysqli_fetch_array($result);
 <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
 		<label for="username">Username</label>
-		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>">
+		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>" autofocus>
 	</div>
 
 	<div class="mb-3">
 		<label for="mobile">Mobile</label>
-		<input type="number" name="mobile" class="form-control" value="<?=$rows['mobile']?>" required>
+		<input type="number" name="mobile" class="form-control" value="<?=$rows['mobile']?>">
 	</div>
 
 	<div class="mb-3">
@@ -111,20 +71,18 @@ $rows=mysqli_fetch_array($result);
 		  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <?php if($rows['gender']=="female"){echo "checked";}?>>
 		  <label class="form-check-label" for="inlineRadio2">Female</label>
 		</div>
-	</div>
-
-	<div class="mb-3">
-		<label for="password">Password</label>
-		<input type="text" name="password" class="form-control" value="<?=$rows['password']?>">
-	</div>
-
-	<div class="mb-3">
-		<label for="cpassword">Confirm Password</label>
-		<input type="text" name="cpassword" class="form-control" value="<?=$rows['password']?>">
+		<div class="form-check form-check-inline">
+		  <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="other" <?php if($rows['gender']=="other"){echo "checked";}?>>
+		  <label class="form-check-label" for="inlineRadio3">Other</label>
+		</div>
 	</div>
 
 	<div class="mb-3 text-center">
 		<input type="submit" name="update" value="Save changes" class="btn btn-primary">
+	</div>
+
+	<div class="mb-3 text-center">
+		<button type="submit" name="password" class="btn btn-primary">Change password</button>
 	</div>
 	
 </form>
@@ -141,16 +99,16 @@ $rows=mysqli_fetch_array($result);
 if(isset($_SESSION['profile'])){
 	if($_SESSION['profile'] == 'user_profile.jpg'){
 ?>
-<img
+<img 
 	src="../assets/profiles/user_profile.jpg" 
-	style="width:120px; height: 120px; border-radius: 50%; margin-top:2%"/>
+	style="width:120px; height: 120px; border-radius: 50%;"/>
 <?php
 	}
 	else{
 ?>
 <img 
 	src="../assets/profiles/<?=$_SESSION['profile']?>" 
-	style="width:120px; height: 120px; border-radius: 50%; margin-top:2%"/>	
+	style="width:120px; height: 120px; border-radius: 50%;"/>	
 <?php
 	}
 }
@@ -209,32 +167,7 @@ if(isset($_POST['upload'])){
 					</div>
 				</div>
 			</div>
-			<div class="text-center">
-	<button class='btn btn-outline-dark' style='margin-top:1%' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-	Delete my account
-</button>
-</div>
 		</div>
 	</div>	
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm account deletion</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete your account? This action cannot be undone.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-		<form method="post">
-        	<button type="submit" name="delete" class="btn btn-outline-dark">Yes, delete</button>
-		</form>
-		</div>
-    </div>
-  </div>
-</div>
-	
 </body>
 </html>
