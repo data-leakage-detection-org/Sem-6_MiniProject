@@ -19,7 +19,7 @@
 $userid=$_SESSION['user_id'];
 if(isset($_POST['password']))
 {
-	header('location:change_password.php');
+	header('location:sendEmail.php');
 
 }
 if(isset($_POST['update'])){		
@@ -53,7 +53,7 @@ $rows=mysqli_fetch_array($result);
 <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
 		<label for="username">Username</label>
-		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>" autofocus>
+		<input type="text" name="username" class="form-control" value="<?=$rows['username']?>">
 	</div>
 
 	<div class="mb-3">

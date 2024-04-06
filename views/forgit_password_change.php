@@ -14,18 +14,7 @@
         <div style="width:50%;margin:auto;border:1px solid black;padding:2.5%;border-radius:10px">
         <h2 class="text-center">Change password</h2><br>
 <?php
-$userid=-1;
-if(isset($_SESSION['user_id']))
-{
-   $userid=$_SESSION['user_id']; 
-}
-elseif(isset($_SESSION['register_email']))
-{
-    $email = $_SESSION['email'];
-    $result = mysqli_query($conn,"SELECT id FROM users WHERE email='$email'");
-    $row = mysqli_fetch_array($result);
-    $userid = $row['id'];
-}
+
 if(isset($_POST['change_password'])){
     $password=$_POST['password'];
     $cpassword=$_POST['cpassword'];
@@ -38,8 +27,6 @@ if(isset($_POST['change_password'])){
             if($result)
             {
                 echo "<div class='alert alert-success'><strong>Success:</strong> Successfully updated.</div>";
-                unset($_SESSION['register_email']);
-                // unset($_SESSION['forgot']); DO NOT DELETE
             }
         }
         else

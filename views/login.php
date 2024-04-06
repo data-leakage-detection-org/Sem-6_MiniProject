@@ -64,7 +64,12 @@ Invalid email id or password
 							</div>
 
 							<div class="mb-2 text-center">
-								New User? <a href="register.php" class="text-decoration-none">Sign up!</a>
+								New User? <a href="sendEmail.php" class="text-decoration-none">Sign up!</a>
+							</div>
+
+							<div class="mb-2 text-center">
+								<!-- DO NOT DELETE <a href="sendEmail.php?forgot=true" class="text-decoration-none">Forgot password?</a> DO NOT DELETE  -->
+								<a href="#" class="text-decoration-none">Forgot password?</a>
 							</div>
 						</form>
 					</div>
