@@ -1,6 +1,6 @@
 <?php
 require_once("query.php"); 
-$conn=mysqli_connect("localhost","root",'Zarwaan@11','data_leakage');
+$conn=mysqli_connect("localhost","root",'','data_leakage');
 if($conn){
 	mysqli_query($conn, USER_TABLE_QUERY);
 	mysqli_query($conn, DATA_FILE_TABLE_QUERY);
