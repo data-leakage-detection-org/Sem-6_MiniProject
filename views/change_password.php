@@ -15,16 +15,22 @@
         <h2 class="text-center">Change password</h2><br>
 <?php
 $userid=-1;
+// if(isset($_SESSION['register_email']))
+// {
+    // echo $_SESSION['register_email'];
+// }
 if(isset($_SESSION['user_id']))
 {
    $userid=$_SESSION['user_id']; 
 }
 elseif(isset($_SESSION['register_email']))
 {
-    $email = $_SESSION['email'];
+    // echo $_SESSION['register_email'];
+    $email = $_SESSION['register_email'];
     $result = mysqli_query($conn,"SELECT id FROM users WHERE email='$email'");
     $row = mysqli_fetch_array($result);
     $userid = $row['id'];
+    // echo $userid;
 }
 if(isset($_POST['change_password'])){
     $password=$_POST['password'];

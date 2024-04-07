@@ -62,6 +62,10 @@ function OTPgenerator(){
 //     echo($forgot);
 // }
 
+if(isset($_SESSION['forgot']))
+{
+    // var_dump($_SESSION['forgot']);
+}
 
 if(isset($_POST['sendEmail'])){
     //FUCKING BITCHASS ERROR
@@ -80,7 +84,8 @@ if(isset($_POST['sendEmail'])){
         
         // if($_SESSION['forgot']==='no')
         // if(strcmp($_SESSION['forgot'],'no')==0)
-        // {
+        if(!isset($_SESSION['forgot']))
+        {
             $email = $_POST['email'];
             // echo $email;
             if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))>0) //this
@@ -89,18 +94,18 @@ if(isset($_POST['sendEmail'])){
                 header('location:sendEmail.php');
                 exit();
             } //this
-        // } //this
-        // else //this
-        // {
-        //     $email = $_POST['email'];
-        //     // echo $email;
-        //     if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))==0) //this
-        //     {
-        //         $_SESSION['error_message'] = "<div class='alert alert-danger'>This email does not have an account!</div>";
-        //         header('location:sendEmail.php?forgot=true');
-        //         exit();
-        //     } //this
-        // }
+        } //this
+        else //this
+        {
+            $email = $_POST['email'];
+            // echo $email;
+            if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))==0) //this
+            {
+                $_SESSION['error_message'] = "<div class='alert alert-danger'>This email does not have an account!</div>";
+                header('location:sendEmail.php');
+                exit();
+            } //this
+        }
     }
     //DO NOT DELETE ANYTHING
     

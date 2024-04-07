@@ -10,9 +10,13 @@ if(isset($_SESSION['otp'])){
 //DO NOT DELETE
 if(isset($_SESSION['forgot']))
 {
-    echo $_SESSION['forgot'];
+    // var_dump($_SESSION['forgot']);
 }
 //DO NOT DELETE
+if(isset($_SESSION['register_email']))
+{
+    // echo $_SESSION['register_email'];
+}
 
 if(isset($_POST['confirmOTP'])){
     $enteredOTP = $_POST['otp'];
@@ -34,18 +38,19 @@ if(isset($_POST['confirmOTP'])){
         // }
 
         //DO NOT DELETE ANYTHING
-        elseif(!isset($_SESSION['user_id']))
+        // elseif(!isset($_SESSION['user_id']))
+        else
         {
-            // if($_SESSION['forgot']=='yes')
-            // {
-            //     // unset($_SESSION['forgot']);
-            //     header('location:change_password.php');
-            // } //this
-            // elseif($_SESSION['forgot']=='no') //this
-            // {
+            if(isset($_SESSION['forgot']))
+            {
+                unset($_SESSION['forgot']);
+                header('location:change_password.php');
+            } //this
+            else //this
+            {
                 // unset($_SESSION['forgot']);
                 header('location:register.php'); //this
-            // }
+            }
         }
         //DO NOT DELETE ANYTHING
 

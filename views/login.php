@@ -48,6 +48,16 @@ Invalid email id or password
 <?php
 		}
 	}
+	if(isset($_POST['forgotpass'])){
+		$_SESSION['forgot'] = true;
+		header('location:sendEmail.php');
+	}
+	if(isset($_POST['register'])){
+		if(isset($_SESSION['forgot'])){
+			unset($_SESSION['forgot']);
+		}
+		header('location:sendEmail.php');
+	}
  ?>
  						<form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
 							<div class="mb-2">
@@ -62,14 +72,18 @@ Invalid email id or password
 							<div class="mb-2 text-center">
 								<input type="submit" name="login" value="Login" class="btn btn-primary">
 							</div>
-
+</form>
+<form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
 							<div class="mb-2 text-center">
-								New User? <a href="sendEmail.php" class="text-decoration-none">Sign up!</a>
+								<!-- New User? <a href="sendEmail.php" class="text-decoration-none">Sign up!</a> -->
+								New User?<button type='submit' class='link-primary' style='border:none; background-color: transparent;' name='register'>Sign up!</button>
 							</div>
+
 
 							<div class="mb-2 text-center">
 								<!-- DO NOT DELETE <a href="sendEmail.php?forgot=true" class="text-decoration-none">Forgot password?</a> DO NOT DELETE  -->
-								<a href="#" class="text-decoration-none">Forgot password?</a>
+								<!-- <a href="#" class="text-decoration-none">Forgot password?</a> -->
+								<button type='submit' class='link-primary' style='border:none; background-color: transparent;' name='forgotpass'>Forgot password?</button>
 							</div>
 						</form>
 					</div>
