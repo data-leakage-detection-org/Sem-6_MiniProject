@@ -37,7 +37,11 @@ function getusername($userid){
 	$sql="SELECT * FROM users WHERE id='$userid' LIMIT 1";
 	$result=mysqli_query($conn,$sql);
 	$rows=mysqli_fetch_array($result);
-	return $rows['username'];
+  if(isset($rows['username']))
+  {
+    return $rows['username'];
+  }
+	return null;
 } 
 function getuser($userid){
     global $conn;  

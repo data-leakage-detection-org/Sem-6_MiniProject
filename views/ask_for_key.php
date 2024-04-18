@@ -18,5 +18,6 @@ $secret_key = $file['secret_key'];
 $request_to_user = $file['sender_id'];
 $sql="INSERT INTO key_requests(request_by_user, request_to_user, file, secret_key, status)VALUES('$asker', '$request_to_user', '$id', '$secret_key', 'pending')";
 mysqli_query($conn, $sql);
-echo "Request successfully sent.";
+// echo "Request successfully sent.";
+header("location:list_of_received_files.php")
 ?>

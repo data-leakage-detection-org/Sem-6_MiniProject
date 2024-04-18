@@ -26,19 +26,6 @@ if(isset($_POST['confirmOTP'])){
         if(isset($_SESSION['user_id'])){ ///this
             header('location:change_password.php'); //this
         }
-        // elseif(!isset($_SESSION['user_id']) && $_SESSION['forgot']=='no') //this
-        // {
-        //     unset($_SESSION['forgot']);
-        //     header('location:register.php'); //this
-        // }
-        // elseif(!isset($_SESSION['user_id']) && $_SESSION['forgot']=='yes') //this
-        // {
-        //     unset($_SESSION['forgot']);
-        //     header('location:change_password.php'); //this
-        // }
-
-        //DO NOT DELETE ANYTHING
-        // elseif(!isset($_SESSION['user_id']))
         else
         {
             if(isset($_SESSION['forgot']))

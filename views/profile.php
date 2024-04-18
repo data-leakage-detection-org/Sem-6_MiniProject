@@ -41,7 +41,8 @@ if(isset($_POST["delete"])){
 if(isset($_POST['update'])){		
 		$username=$_POST['username'];	
 
-		if(!empty($username) && !empty($mobile) && !empty($cpassword))
+		if(!empty($username) && !empty($mobile))
+		// && !empty($cpassword))
 		{		
 			$sql="UPDATE users SET username='$username', gender='$gender', mobile='$mobile' WHERE id='$userid' LIMIT 1";
 			$result=mysqli_query($conn,$sql);

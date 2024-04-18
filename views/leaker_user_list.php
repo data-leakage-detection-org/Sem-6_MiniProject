@@ -19,12 +19,12 @@
 	   <tr>
 	        <th>Sr No</th>	        
 	        <th>File Details</th>
-	        <th>Leaker</th>	        	        
+	        <th>Unautorised user</th>	        	        
 	   </tr>
 	</thead>
 	<tbody>
 <?php 
-	$sql="SELECT * FROM leakers ORDER BY id DESC";
+	$sql="SELECT * FROM leaked_messages ORDER BY id DESC";
 	$result=mysqli_query($conn,$sql);
 	if($result){
 	     if(mysqli_num_rows($result)>0){
@@ -33,9 +33,9 @@
 	          	$n++;
 	          	$id=$rows['id'];
 	            $userid=$rows['user_id'];
-	            $subject=$rows['subject'];
+	            // $subject=$rows['subject'];
 	            $fileid=$rows['file_id'];
-	            $secretkey=$rows['secret_key'];              
+	            // $secretkey=$rows['secret_key'];              
 				$user=getuser($userid);
 				$file_detail=getfiledetail($fileid);
 ?>   

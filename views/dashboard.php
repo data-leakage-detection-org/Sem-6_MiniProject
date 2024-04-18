@@ -34,7 +34,7 @@ if(isset($_SESSION['user_type'])){
 <a href="list_of_files_send_by_other_users.php" class="list-group-item"><i class="bi bi-people"></i> Files sent by another</a>
 <a href="display_graphs.php" class="list-group-item"><i class="bi bi-bar-chart-line"></i> Graphs</a>
 <a href="users.php" class="list-group-item"><i class="bi bi-info-circle-fill"></i> User registeration request</a>
-<a href="#" class="list-group-item"><i class="bi bi-paint-bucket"></i> Unauthorised access</a>
+<a href="leaker_user_list.php" class="list-group-item"><i class="bi bi-paint-bucket"></i> Unauthorised access</a>
 <?php
 	}
 	elseif($_SESSION['user_type']=='user'){

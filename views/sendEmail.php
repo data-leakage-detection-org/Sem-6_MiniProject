@@ -36,101 +36,35 @@ function OTPgenerator(){
             rand(0,9)*pow(10,0);
 }
 
-// Send email
-
-//DO NOT DELETE
-// $_SESSION['forgot'] = 'no';
-// $forgot = 'no';
-// if(isset($_GET['forgot']))
-// {
-//     $_SESSION['forgot'] = 'yes';
-// }
-// echo $_SESSION['forgot'];
-//DO NOT DELETE
-
-
-// if($_SESSION['forgot'])
-// {
-//     // echo 'true';
-//     $forgot = 'yes';
-//     echo($forgot);
-// }
-// else
-// {
-//     // echo 'false';
-//     $forgot = 'no';
-//     echo($forgot);
-// }
-
 if(isset($_SESSION['forgot']))
 {
     // var_dump($_SESSION['forgot']);
 }
 
 if(isset($_POST['sendEmail'])){
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-    //FUCKING BITCHASS ERROR
-
-    //DO NOT DELETE ANYTHING
-    // $email = $_POST['email'];
     if(!isset($_SESSION['user_id']))
     {
-        
-        // if($_SESSION['forgot']==='no')
-        // if(strcmp($_SESSION['forgot'],'no')==0)
         if(!isset($_SESSION['forgot']))
         {
             $email = $_POST['email'];
-            // echo $email;
             if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))>0) //this
             {
                 $_SESSION['error_message'] = "<div class='alert alert-danger'>This email already has an account!</div>";
                 header('location:sendEmail.php');
                 exit();
-            } //this
-        } //this
-        else //this
+            } 
+        } 
+        else
         {
             $email = $_POST['email'];
-            // echo $email;
             if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))==0) //this
             {
                 $_SESSION['error_message'] = "<div class='alert alert-danger'>This email does not have an account!</div>";
                 header('location:sendEmail.php');
                 exit();
-            } //this
+            }
         }
     }
-    //DO NOT DELETE ANYTHING
-    
-    // if(!$_SESSION['forgot']) //this
-    // {
-    //     $email = $_POST['email'];
-    //     // echo $email;
-    //     if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))>0) //this
-    //     {
-    //         $_SESSION['error_message'] = "<div class='alert alert-danger'>This email already has an account!</div>";
-    //         header('location:sendEmail.php');
-    //         exit();
-    //     } //this
-    // }
-    // elseif (!isset($_SESSION['user_id']) && $_SESSION['forgot']) //this
-    // {
-    //     $email = $_POST['email'];
-    //     // echo $email;
-    //     if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email='$email'"))==0) //this
-    //     {
-    //         $_SESSION['error_message'] = "<div class='alert alert-danger'>This email does not have an account!</div>";
-    //         header('location:sendEmail.php?forgot=true');
-    //         exit();
-    //     } //this
-    // } //this
     
     {
         // Server settings
@@ -201,10 +135,6 @@ if(isset($_POST['sendEmail'])){
 </head>
 <body class="dashboard_background">
 	<?php include_once("menubar.php"); ?>
-        <!-- <h1> Send E-mail </h1>
-    <form method='post'>
-        <button type='submit' name='sendEmail' class='btn btn-primary'>Send Email</button>
-    </form> -->
     <div class="container" style="padding-top:12%">
         <div style="width:50%;margin:auto;border:1px solid black;padding:2.5%;border-radius:10px">
         <h2 class="text-center">Confirm email</h2><br>

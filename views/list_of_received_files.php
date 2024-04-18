@@ -37,7 +37,7 @@ function  keyRequestStatus($fileid, $asker){
 	    <th>Subject</th>
 	    <th>File name</th>
 	    <th>file size</th>
-	    <th>User(To)</th>    
+	    <th>From</th>    
 	    <th>Action</th>
 	 </tr>
 	</thead>
@@ -55,8 +55,8 @@ function  keyRequestStatus($fileid, $asker){
 				$subject=$rows['subject'];
 				$filename=$rows['file_name'];
 				$filesize=$rows['file_size'];
-				$userid=$rows['receiver_id'];
-				$user=getusername($userid);
+				$sentfromuserid=$rows['sender_id'];
+				$user=getusername($sentfromuserid);
 				$status = keyRequestStatus($id, $_SESSION['user_id']);
 ?>
 
@@ -64,7 +64,7 @@ function  keyRequestStatus($fileid, $asker){
   <td><?=$n?></td>
   <td><?=$subject?></td>
   <td><?=$filename?></td>
-  <td><?=$filesize?></td>
+  <td><?=round(floatval($filesize),2)?> MB</td>
   <td><?=ucfirst($user)?></td> 
   <td>
   	<a href="download.php?id=<?=$id?>" class="btn btn-primary mb-2">Download</a>  
@@ -100,8 +100,7 @@ Shared (<?=$status['secret_key']?>)
 <?php }else{ ?>
 
 <div class='alert alert-danger'>
-  <strong>Failed:</strong>
-  No users found.
+  No files received yet!
 </div>
 
  <?php    } } else{ ?>

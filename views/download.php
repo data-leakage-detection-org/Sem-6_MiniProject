@@ -67,7 +67,7 @@ $filename = $row['file_name'];
 $url="../assets/files/$filename";
 $ext=pathinfo($url, PATHINFO_EXTENSION);
 if($ext=="pdf"){
-$url="../download_with_watermark.php?name=$filename";
+$url="../download_with_watermark.php?name=$filename#toolbar=0";
 header("Location:$url");
 exit();
 }
@@ -86,7 +86,7 @@ exit();
 			$remaining_attempts = get_attempt($id);
 			echo "
 			<div class='alert alert-danger'>
-				Invalid secret key, try again, Only $remaining_attempts attempt left.
+				Invalid secret key, try again, Only ".$remaining_attempts+1 ." attempts left.
 			</div>";
 			if($remaining_attempts == "0"){
 				$created_at=date("Y-m-d H:i:s");

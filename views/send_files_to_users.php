@@ -143,7 +143,7 @@ Fill up data
 <option></option>								
 <?php								
 $self=$_SESSION['user_id'];
-$sql="SELECT * FROM users WHERE admin_active='1' AND id<>'$self' ORDER BY id ASC";
+$sql="SELECT * FROM users WHERE admin_active='1' AND id<>'$self' AND blocked='0' ORDER BY username ASC";
 $result=mysqli_query($conn,$sql);
 if($result){	
     if(mysqli_num_rows($result)>0){
